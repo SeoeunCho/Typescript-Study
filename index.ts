@@ -98,10 +98,10 @@ function canMarriage(income: number, house: boolean, grade: string): string | vo
 console.log(canMarriage(700, false, '중')); // 결혼가능
 console.log(canMarriage(100, false, '상'));
 
-// Type Narrowing : if문 등으로 타입을 하나로 정해주는 것, else문 끝까지 써줘야 안전함
-// Type이 아직 하나로 확정되지 않았을 경우
-// union type은 연산불가이기 떄문에 사용
-// Narrowing 판정 문법 : typeof 변수, 속성명 in 오브젝트자료, 인스턴스 instanceof 부모
+/** Type Narrowing : if문 등으로 타입을 하나로 정해주는 것, else문 끝까지 써줘야 안전함
+ ** Type이 아직 하나로 확정되지 않았을 경우
+ ** union type은 연산불가이기 떄문에 사용
+ ** Narrowing 판정 문법 : typeof 변수, 속성명 in 오브젝트자료, 인스턴스 instanceof 부모 */
 function narrowing1(x: number | string) {
   if (typeof x === 'number') return x + 1;
   else if (typeof x === 'string') return x + 1;
@@ -143,18 +143,18 @@ function getSubject(x: { subject: string | string[] }) {
 console.log(getSubject(t1));
 console.log(getSubject(t2));
 
-// Type Assertion : 타입 덮어쓰기, 변수 as 타입
-// 1. Narrowing 할 때 사용 (union 타입일때)
-// 2. 파라미터에 무슨 타입이 들어올지 100% 확실할 때 사용
-// 디버깅할때 사용하기 좋음, 막 쓰면 좋이 않음
+/** Type Assertion : 타입 덮어쓰기, 변수 as 타입
+1. Narrowing 할 때 사용 (union 타입일때)
+2. 파라미터에 무슨 타입이 들어올지 100% 확실할 때 사용
+** 디버깅할때 사용하기 좋음, 막 쓰면 좋지 않음 */
 function assertion1(x: number | string) {
   let array: number[] = [];
   array[0] = x as number;
 }
 assertion1(123);
 
-// Type alias (타입변수) : 타입이 길면 변수로 사용 가능
-// type변수 재정의 불가능
+/*** Type alias (타입변수) : 타입이 길면 변수로 사용 가능
+ ** type변수 재정의 불가능 */
 type LastName = string | number | undefined;
 let testName2: LastName = 'kim';
 testName2 = 123;
@@ -162,8 +162,8 @@ testName2 = 123;
 type Animal = { name: string; age: number };
 let animal1: Animal = { name: 'panda', age: 5 };
 
-// javascript const변수에 object자료형이 들어오면 재할당 가능
-// typescript readonly + 속성 : 재할당 방지 가능 / 속성 변경 불가능하게 잠궈줌
+// javascript - const변수에 object자료형이 들어오면 재할당 가능
+/** typescript - readonly + 속성 : 재할당 방지 가능 / 속성 변경 불가능하게 잠궈줌 */
 type Friend = { readonly name: string };
 const friend: Friend = { name: '서은' };
 // friend.name = '현주'; // error
@@ -199,7 +199,7 @@ type Info2 = { adult: boolean };
 type NewInfo = Info1 & Info2;
 let userInfoTest: NewInfo = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
 
-// type alias에 함수 type 저장하는 법 - 함수표현식 사용
+/** type alias에 함수 type 저장하는 법 - 함수표현식 사용 */
 type funcType = (x: string) => number;
 let func: funcType = function (x) {
   return 10;
@@ -251,7 +251,7 @@ function assignFunc(str: string, func1: Func1Type, func2: Func2Type) {
 }
 console.log(assignFunc('010-1111-2222', cutZero, removeDash));
 
-// Literal Types : 변수에 들어올 값을 특정지어 더욱 엄격하게 관리해줌
+/** Literal Types : 변수에 들어올 값을 특정지어 더욱 엄격하게 관리해줌 */
 let myName: 'kim' | 'park';
 myName = 'park';
 
@@ -262,10 +262,10 @@ function checkRSP(x: '가위' | '바위' | '보'): ('가위' | '바위' | '보')
 }
 console.log(checkRSP('보'));
 
-// as const
-// 1. 타입을 Object속성의 value로 바꿔줌
-// 2. object안에 있는 모든 속성을 readonly로 바꿔줌
-// Object자료를 완전히 잠궈 놓고 싶을때 (리터럴타입으로 고정하고 싶을때)
+/** as const
+1. 타입을 Object속성의 value로 바꿔줌
+2. object안에 있는 모든 속성을 readonly로 바꿔줌
+** Object자료를 완전히 잠궈 놓고 싶을때 (리터럴타입으로 고정하고 싶을때) */
 let txt1 = { name: 'kim' } as const; // type = 'kim
 
 // 6. Array에 쓸 수 있는 tuple 타입
@@ -293,3 +293,45 @@ class User {
     this.name = name;
   }
 }
+
+/** HTML 조작시 narrowing 방법 */
+let title = document.querySelector('#title');
+// 1. Narrowing
+if (title !== null) {
+  title.innerHTML = '반가워요';
+}
+// 2. instance of 연산자 - 가장 좋은 방법
+if (title instanceof Element) {
+  title.innerHTML = '반가워요';
+}
+// 3. assertion
+title = document.querySelector('#title') as Element;
+title.innerHTML = '대반상고';
+// 4. 오브젝트에 붙이는 ?. 옵셔널체이닝 = JS
+title = document.querySelector('#title') as Element;
+if (title?.innerHTML !== undefined) title.innerHTML = '고맙습니다';
+
+// 예제
+let link = document.querySelector('.link');
+if (link instanceof HTMLAnchorElement) {
+  link.href = 'https://kakao.com';
+}
+
+let button = document.querySelector('#button');
+button?.addEventListener('click', () => {
+  console.log('버튼클릭함');
+});
+
+// 연습1
+let img = document.querySelector('#image');
+button?.addEventListener('click', () => {
+  if (img instanceof HTMLImageElement) img.src = 'new.jpg';
+});
+
+// 연습2
+let site = document.querySelectorAll('.naver');
+site.forEach((a) => {
+  if (a instanceof HTMLAnchorElement) {
+    a.href = 'https://kakao.com';
+  }
+});
