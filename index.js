@@ -250,3 +250,20 @@ site.forEach(function (a) {
         a.href = 'https://kakao.com';
     }
 });
+// class 키워드 알아보고 가기!
+function machine(q, w) {
+    this.q = q;
+    this.w = w;
+}
+var nunu = new machine('consume', 'snowball');
+var garen = new machine('strike', 'courage');
+console.log(nunu, garen);
+var Hero = /** @class */ (function () {
+    function Hero(q, w) {
+        this.q = q;
+        this.w = w;
+    }
+    return Hero;
+}());
+var goll = new Hero('vue', 'react');
+console.log(goll);

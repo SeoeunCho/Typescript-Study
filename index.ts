@@ -335,3 +335,22 @@ site.forEach((a) => {
     a.href = 'https://kakao.com';
   }
 });
+
+
+// class 키워드 알아보고 가기!
+function machine(q, w) {
+  this.q = q;
+  this.w = w;
+}
+let nunu = new machine('consume', 'snowball');
+let garen = new machine('strike', 'courage');
+console.log(nunu, garen);
+
+class Hero {
+  constructor(q, w) {
+    this.q = q;
+    this.w = w;
+  }
+}
+let goll = new Hero('vue', 'react');
+console.log(goll);
