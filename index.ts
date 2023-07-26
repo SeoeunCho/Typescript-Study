@@ -71,7 +71,7 @@ function result(x: number): void {
   1 + 1;
 }
 
-// 숙제1
+// 연습1
 function setName(x?: string): void {
   if (x) console.log('안녕하세요 ' + x + '님.');
   else console.log('이름이 없습니다.');
@@ -79,14 +79,14 @@ function setName(x?: string): void {
 setName(); // "이름이 없습니다."
 setName('홍길동'); // "안녕하세요 홍길동님."
 
-// 숙제2
+// 연습2
 function checkLen(x: string | number): number {
   return x.toString().length;
 }
 checkLen('123');
 checkLen(123);
 
-// 숙제3
+// 연습3
 function canMarriage(income: number, house: boolean, grade: string): string | void {
   let score: number = 0;
   score += income;
@@ -117,7 +117,7 @@ function narrowing2(x: number | string) {
 }
 narrowing2(123);
 
-// 숙제1
+// 연습1
 function cleaningArr(x: (number | string)[]) {
   let arr: number[] = [];
 
@@ -130,7 +130,7 @@ function cleaningArr(x: (number | string)[]) {
 }
 console.log(cleaningArr(['1', 2, '3']));
 
-// 숙제2
+// 연습2
 let t1 = { subject: 'math' };
 let t2 = { subject: ['science', 'english'] };
 let t3 = { hello: 'hi' };
@@ -178,26 +178,78 @@ type PositionY = { y: number };
 type NewType = PositionX & PositionY;
 let position: NewType = { x: 10, y: 20 };
 
-// 숙제1 : object 속성이 중복될때 하나로 합쳐짐
+// 연습1 : object 속성이 중복될때 하나로 합쳐짐
 type Obj1 = { name: string };
 type Obj2 = { name: string };
 type NewObj = Obj1 & Obj2;
 let objectTest: NewObj = { name: 'kim' };
 console.log(objectTest);
 
-// 숙제2
+// 연습2
 type MyType = { color?: string; size: number; readonly position: number[] };
 let myTypeTest: MyType = { size: 500, position: [1, 2, 3] };
 console.log(myTypeTest);
 
-// 숙제3
+// 연습3
 type Info1 = { name: string; phone: number; email: string };
 let infoType: Info1 = { name: 'kim', phone: 123, email: 'abc@naver.com' };
 
-// 숙제4
+// 연습4
 type Info2 = { adult: boolean };
 type NewInfo = Info1 & Info2;
 let userInfoTest: NewInfo = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
+
+// type alias에 함수 type 저장하는 법 - 함수표현식 사용
+type funcType = (x: string) => number;
+let func: funcType = function (x) {
+  return 10;
+};
+
+// 연습1
+// object안에 함수 만들 수 있음
+let memInfo: memType = {
+  name: 'kim',
+  age: 18,
+  plusOne(x) {
+    return x + 1;
+  },
+  changeName: () => {
+    console.log('안녕');
+  },
+};
+console.log(memInfo.plusOne(2));
+console.log(memInfo.changeName());
+
+type memType = {
+  name: string;
+  age: number;
+  plusOne: (x: number) => number;
+  changeName: () => void;
+};
+
+// 연습2
+type CutType = (x: string) => string;
+let cutZero: CutType = (x) => {
+  let result = x.replace(/^0+/, '');
+  return result;
+};
+console.log(cutZero('0str'));
+
+function removeDash(x: string): number {
+  let result = x.replace(/-/g, '');
+  return Number(result);
+}
+console.log(removeDash('-1-23-.20'));
+
+// 연습3
+type Func1Type = (x: string) => string;
+type Func2Type = (x: string) => number;
+function assignFunc(str: string, func1: Func1Type, func2: Func2Type) {
+  let result = func1(str);
+  let result2 = func2(result);
+  return result2;
+}
+console.log(assignFunc('010-1111-2222', cutZero, removeDash));
 
 // Literal Types : 변수에 들어올 값을 특정지어 더욱 엄격하게 관리해줌
 let myName: 'kim' | 'park';

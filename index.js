@@ -57,7 +57,7 @@ solution2();
 function result(x) {
     1 + 1;
 }
-// 숙제1
+// 연습1
 function setName(x) {
     if (x)
         console.log('안녕하세요 ' + x + '님.');
@@ -66,13 +66,13 @@ function setName(x) {
 }
 setName(); // "이름이 없습니다."
 setName('홍길동'); // "안녕하세요 홍길동님."
-// 숙제2
+// 연습2
 function checkLen(x) {
     return x.toString().length;
 }
 checkLen('123');
 checkLen(123);
-// 숙제3
+// 연습3
 function canMarriage(income, house, grade) {
     var score = 0;
     score += income;
@@ -105,7 +105,7 @@ function narrowing2(x) {
     }
 }
 narrowing2(123);
-// 숙제1
+// 연습1
 function cleaningArr(x) {
     var arr = [];
     x.forEach(function (el) {
@@ -117,7 +117,7 @@ function cleaningArr(x) {
     return arr;
 }
 console.log(cleaningArr(['1', 2, '3']));
-// 숙제2
+// 연습2
 var t1 = { subject: 'math' };
 var t2 = { subject: ['science', 'english'] };
 var t3 = { hello: 'hi' };
@@ -151,6 +151,39 @@ var myTypeTest = { size: 500, position: [1, 2, 3] };
 console.log(myTypeTest);
 var infoType = { name: 'kim', phone: 123, email: 'abc@naver.com' };
 var userInfoTest = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
+var func = function (x) {
+    return 10;
+};
+// 연습1
+// object안에 함수 만들 수 있음
+var memInfo = {
+    name: 'kim',
+    age: 18,
+    plusOne: function (x) {
+        return x + 1;
+    },
+    changeName: function () {
+        console.log('안녕');
+    },
+};
+console.log(memInfo.plusOne(2));
+console.log(memInfo.changeName());
+var cutZero = function (x) {
+    var result = x.replace(/^0+/, '');
+    return result;
+};
+console.log(cutZero('0str'));
+function removeDash(x) {
+    var result = x.replace(/-/g, '');
+    return Number(result);
+}
+console.log(removeDash('-1-23-.20'));
+function assignFunc(str, func1, func2) {
+    var result = func1(str);
+    var result2 = func2(result);
+    return result2;
+}
+console.log(assignFunc('010-1111-2222', cutZero, removeDash));
 // Literal Types : 변수에 들어올 값을 특정지어 더욱 엄격하게 관리해줌
 var myName;
 myName = 'park';
