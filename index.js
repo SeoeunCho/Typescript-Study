@@ -203,6 +203,9 @@ var txt1 = { name: 'kim' }; // type = 'kim
 var mem1 = [123, true];
 var mem2 = { name: 'kim' };
 var mem3 = { lastName: 'Cho', firstName: 'seoeun' };
+var square = { color: 'red', width: 100 };
+var student = { name: 'kim', score: 2 };
+var teacher = { name: 'kimT', score: 3, age: 51 };
 // 8. Class 타입지정 가능 : constructor 문법
 var Person = /** @class */ (function () {
     function Person() {

@@ -178,7 +178,7 @@ type PositionY = { y: number };
 type NewType = PositionX & PositionY;
 let position: NewType = { x: 10, y: 20 };
 
-// 연습1 : object 속성이 중복될때 하나로 합쳐짐
+// 연습1 : & 기호 (intersection type) : 속성 중복 가능
 type Obj1 = { name: string };
 type Obj2 = { name: string };
 type NewObj = Obj1 & Obj2;
@@ -277,12 +277,39 @@ type Member2 = {
 };
 let mem2: Member2 = { name: 'kim' };
 
-// Object에 타입 지정해야 할 속성이 많을 때
+/** Object에 타입 지정해야 할 속성이 많을 때 */
 type Member3 = {
   // 모든 object 속성 : 글자로 된 모든 속성의 타입
   [key: string]: string;
 };
 let mem3: Member3 = { lastName: 'Cho', firstName: 'seoeun' };
+
+/** object 타입 지정시 interface 사용가능
+ ** interface extends 로 복사가능
+ ** 중복선언 가능*/
+// type Square = { color: string; width: number };
+interface Square {
+  color: string;
+  width: number;
+}
+let square: Square = { color: 'red', width: 100 };
+
+// 연습1 : interface
+type Dog = { name: string };
+type Cat = { age: number } & Dog;
+
+interface Student {
+  name: string;
+}
+interface Student { // 중복선언 가능
+  score: number;
+}
+let student: Student = { name: 'kim', score: 2 };
+
+interface Teacher extends Student {
+  age: number;
+}
+let teacher: Teacher = { name: 'kimT', score:3, age: 51 };
 
 // 8. Class 타입지정 가능 : constructor 문법
 class Person {
