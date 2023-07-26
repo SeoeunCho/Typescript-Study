@@ -199,6 +199,24 @@ type Info2 = { adult: boolean };
 type NewInfo = Info1 & Info2;
 let userInfoTest: NewInfo = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
 
+// Literal Types : 변수에 들어올 값을 특정지어 더욱 엄격하게 관리해줌
+let myName: 'kim' | 'park';
+myName = 'park';
+
+function checkRSP(x: '가위' | '바위' | '보'): ('가위' | '바위' | '보')[] {
+  if (x === '가위') return ['가위'];
+  else if (x === '바위') return ['바위'];
+  else return ['보'];
+}
+console.log(checkRSP('보'));
+
+// as const
+// Object자료를 완전히 잠궈 놓고 싶을때 (리터럴타입으로 고정하고 싶을때)
+let txt1 = { name: 'kim' } as const;
+/* let txt2: {} = { name: 'kim' };
+let txt3 = { name: 'kim' };
+txt3.name as 'kim'; */
+
 // 6. Array에 쓸 수 있는 tuple 타입
 type Member = [number, boolean];
 let mem1: Member = [123, true];

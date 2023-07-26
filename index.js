@@ -151,6 +151,21 @@ var myTypeTest = { size: 500, position: [1, 2, 3] };
 console.log(myTypeTest);
 var infoType = { name: 'kim', phone: 123, email: 'abc@naver.com' };
 var userInfoTest = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
+// Literal Types : 변수에 들어올 값을 특정지어 더욱 엄격하게 관리해줌
+var myName;
+myName = 'park';
+function checkRSP(x) {
+    if (x === '가위')
+        return ['가위'];
+    else if (x === '바위')
+        return ['바위'];
+    else
+        return ['보'];
+}
+console.log(checkRSP('보'));
+// as const
+// Object자료를 완전히 잠궈 놓고 싶을때 (리터럴타입으로 고정하고 싶을때)
+var txt1 = { name: 'kim' };
 var mem1 = [123, true];
 var mem2 = { name: 'kim' };
 var mem3 = { lastName: 'Cho', firstName: 'seoeun' };
