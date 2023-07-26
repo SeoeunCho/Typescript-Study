@@ -211,11 +211,10 @@ function checkRSP(x: '가위' | '바위' | '보'): ('가위' | '바위' | '보')
 console.log(checkRSP('보'));
 
 // as const
+// 1. 타입을 Object속성의 value로 바꿔줌
+// 2. object안에 있는 모든 속성을 readonly로 바꿔줌
 // Object자료를 완전히 잠궈 놓고 싶을때 (리터럴타입으로 고정하고 싶을때)
-let txt1 = { name: 'kim' } as const;
-/* let txt2: {} = { name: 'kim' };
-let txt3 = { name: 'kim' };
-txt3.name as 'kim'; */
+let txt1 = { name: 'kim' } as const; // type = 'kim
 
 // 6. Array에 쓸 수 있는 tuple 타입
 type Member = [number, boolean];

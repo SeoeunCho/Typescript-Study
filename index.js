@@ -164,8 +164,10 @@ function checkRSP(x) {
 }
 console.log(checkRSP('보'));
 // as const
+// 1. 타입을 Object속성의 value로 바꿔줌
+// 2. object안에 있는 모든 속성을 readonly로 바꿔줌
 // Object자료를 완전히 잠궈 놓고 싶을때 (리터럴타입으로 고정하고 싶을때)
-var txt1 = { name: 'kim' };
+var txt1 = { name: 'kim' }; // type = 'kim
 var mem1 = [123, true];
 var mem2 = { name: 'kim' };
 var mem3 = { lastName: 'Cho', firstName: 'seoeun' };
