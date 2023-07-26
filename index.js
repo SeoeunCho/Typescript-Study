@@ -18,6 +18,7 @@ test4 = 123;
 test4 = {};
 // let test5 :string = test3; // test3가 any 타입이라서 타입실드가 죽은 상태라 가능해짐, 디버깅 어려움
 // let test5 :string = test4; // error
+// 예제
 var user = 'kim';
 var age = undefined;
 var married = false;
@@ -41,8 +42,6 @@ nameObj = { name: 'cho', age: 28 };
 // 4. Union Type (= or)
 var testName1 = 123;
 testName1 = ['kim'];
-var testName2 = 'kim';
-testName2 = 123;
 // 5. 함수 : 파라미터, return 타입지정 가능
 function solution(x) {
     return x * 2;
@@ -58,6 +57,7 @@ solution2();
 function result(x) {
     1 + 1;
 }
+// 숙제1
 function setName(x) {
     if (x)
         console.log('안녕하세요 ' + x + '님.');
@@ -66,11 +66,13 @@ function setName(x) {
 }
 setName(); // "이름이 없습니다."
 setName('홍길동'); // "안녕하세요 홍길동님."
+// 숙제2
 function checkLen(x) {
     return x.toString().length;
 }
 checkLen('123');
 checkLen(123);
+// 숙제3
 function canMarriage(income, house, grade) {
     var score = 0;
     score += income;
@@ -103,6 +105,7 @@ function narrowing2(x) {
     }
 }
 narrowing2(123);
+// 숙제1
 function cleaningArr(x) {
     var arr = [];
     x.forEach(function (el) {
@@ -114,6 +117,7 @@ function cleaningArr(x) {
     return arr;
 }
 console.log(cleaningArr(['1', 2, '3']));
+// 숙제2
 var t1 = { subject: 'math' };
 var t2 = { subject: ['science', 'english'] };
 var t3 = { hello: 'hi' };
@@ -136,6 +140,17 @@ function assertion1(x) {
     array[0] = x;
 }
 assertion1(123);
+var testName2 = 'kim';
+testName2 = 123;
+var animal1 = { name: 'panda', age: 5 };
+var friend = { name: '서은' };
+var position = { x: 10, y: 20 };
+var objectTest = { name: 'kim' };
+console.log(objectTest);
+var myTypeTest = { size: 500, position: [1, 2, 3] };
+console.log(myTypeTest);
+var infoType = { name: 'kim', phone: 123, email: 'abc@naver.com' };
+var userInfoTest = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
 var mem1 = [123, true];
 var mem2 = { name: 'kim' };
 var mem3 = { lastName: 'Cho', firstName: 'seoeun' };

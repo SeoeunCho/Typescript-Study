@@ -24,6 +24,7 @@ test4 = {};
 // let test5 :string = test3; // test3가 any 타입이라서 타입실드가 죽은 상태라 가능해짐, 디버깅 어려움
 // let test5 :string = test4; // error
 
+// 예제
 let user: string = 'kim';
 let age: undefined | number = undefined;
 let married: boolean = false;
@@ -52,11 +53,6 @@ nameObj = { name: 'cho', age: 28 };
 let testName1: string[] | number = 123;
 testName1 = ['kim'];
 
-// Type alias : 타입이 길면 변수로 사용 가능
-type nameType = string | number;
-let testName2: nameType = 'kim';
-testName2 = 123;
-
 // 5. 함수 : 파라미터, return 타입지정 가능
 function solution(x: number): number {
   return x * 2;
@@ -75,6 +71,7 @@ function result(x: number): void {
   1 + 1;
 }
 
+// 숙제1
 function setName(x?: string): void {
   if (x) console.log('안녕하세요 ' + x + '님.');
   else console.log('이름이 없습니다.');
@@ -82,12 +79,14 @@ function setName(x?: string): void {
 setName(); // "이름이 없습니다."
 setName('홍길동'); // "안녕하세요 홍길동님."
 
+// 숙제2
 function checkLen(x: string | number): number {
   return x.toString().length;
 }
 checkLen('123');
 checkLen(123);
 
+// 숙제3
 function canMarriage(income: number, house: boolean, grade: string): string | void {
   let score: number = 0;
   score += income;
@@ -118,6 +117,7 @@ function narrowing2(x: number | string) {
 }
 narrowing2(123);
 
+// 숙제1
 function cleaningArr(x: (number | string)[]) {
   let arr: number[] = [];
 
@@ -130,6 +130,7 @@ function cleaningArr(x: (number | string)[]) {
 }
 console.log(cleaningArr(['1', 2, '3']));
 
+// 숙제2
 let t1 = { subject: 'math' };
 let t2 = { subject: ['science', 'english'] };
 let t3 = { hello: 'hi' };
@@ -151,6 +152,52 @@ function assertion1(x: number | string) {
   array[0] = x as number;
 }
 assertion1(123);
+
+// Type alias (타입변수) : 타입이 길면 변수로 사용 가능
+// type변수 재정의 불가능
+type LastName = string | number | undefined;
+let testName2: LastName = 'kim';
+testName2 = 123;
+
+type Animal = { name: string; age: number };
+let animal1: Animal = { name: 'panda', age: 5 };
+
+// javascript const변수에 object자료형이 들어오면 재할당 가능
+// typescript readonly + 속성 : 재할당 방지 가능 / 속성 변경 불가능하게 잠궈줌
+type Friend = { readonly name: string };
+const friend: Friend = { name: '서은' };
+// friend.name = '현주'; // error
+
+// alias 합치기
+type Name = string;
+type Age = number;
+type Info = Name | Age;
+
+type PositionX = { x: number };
+type PositionY = { y: number };
+type NewType = PositionX & PositionY;
+let position: NewType = { x: 10, y: 20 };
+
+// 숙제1 : object 속성이 중복될때 하나로 합쳐짐
+type Obj1 = { name: string };
+type Obj2 = { name: string };
+type NewObj = Obj1 & Obj2;
+let objectTest: NewObj = { name: 'kim' };
+console.log(objectTest);
+
+// 숙제2
+type MyType = { color?: string; size: number; readonly position: number[] };
+let myTypeTest: MyType = { size: 500, position: [1, 2, 3] };
+console.log(myTypeTest);
+
+// 숙제3
+type Info1 = { name: string; phone: number; email: string };
+let infoType: Info1 = { name: 'kim', phone: 123, email: 'abc@naver.com' };
+
+// 숙제4
+type Info2 = { adult: boolean };
+type NewInfo = Info1 & Info2;
+let userInfoTest: NewInfo = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
 
 // 6. Array에 쓸 수 있는 tuple 타입
 type Member = [number, boolean];
