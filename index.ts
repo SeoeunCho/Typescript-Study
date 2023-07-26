@@ -71,7 +71,7 @@ function result(x: number): void {
   1 + 1;
 }
 
-// 연습1
+// 연습1 : 함수
 function setName(x?: string): void {
   if (x) console.log('안녕하세요 ' + x + '님.');
   else console.log('이름이 없습니다.');
@@ -79,14 +79,14 @@ function setName(x?: string): void {
 setName(); // "이름이 없습니다."
 setName('홍길동'); // "안녕하세요 홍길동님."
 
-// 연습2
+// 연습2 : 함수
 function checkLen(x: string | number): number {
   return x.toString().length;
 }
 checkLen('123');
 checkLen(123);
 
-// 연습3
+// 연습3 : 함수
 function canMarriage(income: number, house: boolean, grade: string): string | void {
   let score: number = 0;
   score += income;
@@ -117,7 +117,7 @@ function narrowing2(x: number | string) {
 }
 narrowing2(123);
 
-// 연습1
+// 연습1 : Type Narrowing
 function cleaningArr(x: (number | string)[]) {
   let arr: number[] = [];
 
@@ -130,7 +130,7 @@ function cleaningArr(x: (number | string)[]) {
 }
 console.log(cleaningArr(['1', 2, '3']));
 
-// 연습2
+// 연습2 : Type Narrowing
 let t1 = { subject: 'math' };
 let t2 = { subject: ['science', 'english'] };
 let t3 = { hello: 'hi' };
@@ -185,16 +185,16 @@ type NewObj = Obj1 & Obj2;
 let objectTest: NewObj = { name: 'kim' };
 console.log(objectTest);
 
-// 연습2
+// 연습2 : readonly
 type MyType = { color?: string; size: number; readonly position: number[] };
 let myTypeTest: MyType = { size: 500, position: [1, 2, 3] };
 console.log(myTypeTest);
 
-// 연습3
+// 연습3 : Type alias
 type Info1 = { name: string; phone: number; email: string };
 let infoType: Info1 = { name: 'kim', phone: 123, email: 'abc@naver.com' };
 
-// 연습4
+// 연습4 : Type alias
 type Info2 = { adult: boolean };
 type NewInfo = Info1 & Info2;
 let userInfoTest: NewInfo = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: false };
@@ -205,8 +205,7 @@ let func: funcType = function (x) {
   return 10;
 };
 
-// 연습1
-// object안에 함수 만들 수 있음
+// 연습1 : object안에 함수 만들 수 있음
 let memInfo: memType = {
   name: 'kim',
   age: 18,
@@ -227,7 +226,7 @@ type memType = {
   changeName: () => void;
 };
 
-// 연습2
+// 연습2 : 함수에 alias type
 type CutType = (x: string) => string;
 let cutZero: CutType = (x) => {
   let result = x.replace(/^0+/, '');
@@ -241,7 +240,7 @@ function removeDash(x: string): number {
 }
 console.log(removeDash('-1-23-.20'));
 
-// 연습3
+// 연습3 : 함수에 함수 넣기
 type Func1Type = (x: string) => string;
 type Func2Type = (x: string) => number;
 function assignFunc(str: string, func1: Func1Type, func2: Func2Type) {
@@ -286,13 +285,70 @@ type Member3 = {
 let mem3: Member3 = { lastName: 'Cho', firstName: 'seoeun' };
 
 // 8. Class 타입지정 가능 : constructor 문법
+class Person {
+  data: number = 111;
+}
+let p1 = new Person();
+console.log(p1.data);
+
 class User {
   // 미리 변수 선언 및 타입지정
   name: string;
-  constructor(name: string) {
-    this.name = name;
+  constructor(a: string) {
+    this.name = a;
+  }
+
+  solution(a: string) {
+    console.log('안녕' + a);
   }
 }
+let user1 = new User('cho');
+console.log(new User('kim'));
+console.log(new User('park'));
+user1.solution('seoeun');
+
+// 연습1 : class
+class Car {
+  model: string;
+  price: number;
+
+  constructor(a: string, b: number) {
+    this.model = a;
+    this.price = b;
+  }
+
+  tax(): number {
+    return this.price / 10;
+  }
+}
+let car1 = new Car('소나타', 3000);
+console.log(car1);
+console.log(car1.tax());
+
+// 연습2 : class
+class Word {
+  num;
+  str;
+
+  constructor(...param: (string | number)[]) {
+    let numbers: number[] = [];
+    let strings: string[] = [];
+
+    param.forEach((el) => {
+      if (typeof el === 'number') {
+        numbers.push(el);
+      } else {
+        strings.push(el);
+      }
+    });
+
+    this.num = numbers;
+    this.str = strings;
+  }
+}
+let obj = new Word('kim', 3, 5, 'park');
+console.log(obj.num); //[3,5]
+console.log(obj.str); //['kim', 'park']
 
 /** HTML 조작시 narrowing 방법 */
 let title = document.querySelector('#title');
@@ -311,7 +367,7 @@ title.innerHTML = '대반상고';
 title = document.querySelector('#title') as Element;
 if (title?.innerHTML !== undefined) title.innerHTML = '고맙습니다';
 
-// 예제
+// 예제 : HTML 조작시 narrowing
 let link = document.querySelector('.link');
 if (link instanceof HTMLAnchorElement) {
   link.href = 'https://kakao.com';
@@ -322,13 +378,13 @@ button?.addEventListener('click', () => {
   console.log('버튼클릭함');
 });
 
-// 연습1
+// 연습1 : HTML 조작시 narrowing - 옵셔널체이닝, addEventListener, instanceof
 let img = document.querySelector('#image');
 button?.addEventListener('click', () => {
   if (img instanceof HTMLImageElement) img.src = 'new.jpg';
 });
 
-// 연습2
+// 연습2 : HTML 조작시 narrowing - href, instanceof
 let site = document.querySelectorAll('.naver');
 site.forEach((a) => {
   if (a instanceof HTMLAnchorElement) {

@@ -57,7 +57,7 @@ solution2();
 function result(x) {
     1 + 1;
 }
-// 연습1
+// 연습1 : 함수
 function setName(x) {
     if (x)
         console.log('안녕하세요 ' + x + '님.');
@@ -66,13 +66,13 @@ function setName(x) {
 }
 setName(); // "이름이 없습니다."
 setName('홍길동'); // "안녕하세요 홍길동님."
-// 연습2
+// 연습2 : 함수
 function checkLen(x) {
     return x.toString().length;
 }
 checkLen('123');
 checkLen(123);
-// 연습3
+// 연습3 : 함수
 function canMarriage(income, house, grade) {
     var score = 0;
     score += income;
@@ -105,7 +105,7 @@ function narrowing2(x) {
     }
 }
 narrowing2(123);
-// 연습1
+// 연습1 : Type Narrowing
 function cleaningArr(x) {
     var arr = [];
     x.forEach(function (el) {
@@ -117,7 +117,7 @@ function cleaningArr(x) {
     return arr;
 }
 console.log(cleaningArr(['1', 2, '3']));
-// 연습2
+// 연습2 : Type Narrowing
 var t1 = { subject: 'math' };
 var t2 = { subject: ['science', 'english'] };
 var t3 = { hello: 'hi' };
@@ -154,8 +154,7 @@ var userInfoTest = { name: 'kim', phone: 18, email: 'abc@naver.com', adult: fals
 var func = function (x) {
     return 10;
 };
-// 연습1
-// object안에 함수 만들 수 있음
+// 연습1 : object안에 함수 만들 수 있음
 var memInfo = {
     name: 'kim',
     age: 18,
@@ -205,12 +204,66 @@ var mem1 = [123, true];
 var mem2 = { name: 'kim' };
 var mem3 = { lastName: 'Cho', firstName: 'seoeun' };
 // 8. Class 타입지정 가능 : constructor 문법
-var User = /** @class */ (function () {
-    function User(name) {
-        this.name = name;
+var Person = /** @class */ (function () {
+    function Person() {
+        this.data = 111;
     }
+    return Person;
+}());
+var p1 = new Person();
+console.log(p1.data);
+var User = /** @class */ (function () {
+    function User(a) {
+        this.name = a;
+    }
+    User.prototype.solution = function (a) {
+        console.log('안녕' + a);
+    };
     return User;
 }());
+var user1 = new User('cho');
+console.log(new User('kim'));
+console.log(new User('park'));
+user1.solution('seoeun');
+// 연습1 : class
+var Car = /** @class */ (function () {
+    function Car(a, b) {
+        this.model = a;
+        this.price = b;
+    }
+    Car.prototype.tax = function () {
+        return this.price / 10;
+    };
+    return Car;
+}());
+var car1 = new Car('소나타', 3000);
+console.log(car1);
+console.log(car1.tax());
+// 연습2 : class
+var Word = /** @class */ (function () {
+    function Word() {
+        var param = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            param[_i] = arguments[_i];
+        }
+        var numbers = [];
+        var strings = [];
+        param.forEach(function (el) {
+            if (typeof el === 'number') {
+                numbers.push(el);
+            }
+            else {
+                strings.push(el);
+            }
+        });
+        this.num = numbers;
+        this.str = strings;
+    }
+    return Word;
+}());
+var obj = new Word('kim', 3, 5, 'park');
+console.log(obj.num); //[3,5]
+console.log(obj.str); //['kim', 'park']
 /** HTML 조작시 narrowing 방법 */
 var title = document.querySelector('#title');
 // 1. Narrowing
@@ -228,7 +281,7 @@ title.innerHTML = '대반상고';
 title = document.querySelector('#title');
 if ((title === null || title === void 0 ? void 0 : title.innerHTML) !== undefined)
     title.innerHTML = '고맙습니다';
-// 예제
+// 예제 : HTML 조작시 narrowing
 var link = document.querySelector('.link');
 if (link instanceof HTMLAnchorElement) {
     link.href = 'https://kakao.com';
@@ -237,13 +290,13 @@ var button = document.querySelector('#button');
 button === null || button === void 0 ? void 0 : button.addEventListener('click', function () {
     console.log('버튼클릭함');
 });
-// 연습1
+// 연습1 : HTML 조작시 narrowing - 옵셔널체이닝, addEventListener, instanceof
 var img = document.querySelector('#image');
 button === null || button === void 0 ? void 0 : button.addEventListener('click', function () {
     if (img instanceof HTMLImageElement)
         img.src = 'new.jpg';
 });
-// 연습2
+// 연습2 : HTML 조작시 narrowing - href, instanceof
 var site = document.querySelectorAll('.naver');
 site.forEach(function (a) {
     if (a instanceof HTMLAnchorElement) {
