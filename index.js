@@ -267,3 +267,14 @@ var Hero = /** @class */ (function () {
 }());
 var goll = new Hero('vue', 'react');
 console.log(goll);
+// prototype 문법 짚어보기!
+// prototype = 유전자
+function character() {
+    this.q = 'strike';
+    this.w = 'consume';
+}
+character.prototype.name = 'name';
+var nunu2 = new character();
+console.log(nunu2, nunu2.name);
+var arr2 = [4, 2, 1];
+arr2.sort();
