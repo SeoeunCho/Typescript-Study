@@ -420,7 +420,7 @@ site.forEach((a) => {
 });
 
 // class 키워드 알아보고 가기!
-function machine(q, w) {
+function machine(q: string, w: string) {
   this.q = q;
   this.w = w;
 }
@@ -429,13 +429,16 @@ let garen = new machine('strike', 'courage');
 console.log(nunu, garen);
 
 class Hero {
-  constructor(q, w) {
+  q: string;
+  w: string;
+
+  constructor(q: string, w: string) {
     this.q = q;
     this.w = w;
   }
 }
-let goll = new Hero('vue', 'react');
-console.log(goll);
+let heroObj = new Hero('deadpool', 'starload');
+console.log(heroObj);
 
 // prototype 문법 짚어보기!
 // prototype = 유전자
@@ -444,8 +447,8 @@ function character() {
   this.w = 'consume';
 }
 character.prototype.name = 'name';
-let nunu2 = new character();
-console.log(nunu2, nunu2.name);
+let deadpool = new character();
+console.log(deadpool, deadpool.name);
 
 let arr2 = [4, 2, 1];
 arr2.sort();
